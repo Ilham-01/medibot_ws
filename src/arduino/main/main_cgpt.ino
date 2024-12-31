@@ -1,12 +1,3 @@
-/*
-   Main.ino - ROS base controller / firmware 
-   - Convert velocity from ROS to appropriate motor commands
-   - Switch between REMOTE and RESCUE mode:
-     - REMOTE mode: allow ROS control via remote teleop or autonomous navigation (requires rosserial connection)
-     - RESCUE mode: allow manual control using medibot control pendant
-   - Emergency stop function
-*/
-//----------------------------------------------------------------------------------//
 #include <micro_ros_arduino.h>
 #include <rcl/rcl.h>
 #include <rclc/rclc.h>
@@ -68,9 +59,9 @@ void setup(){
   // Pin Initialization
   pinMode(SW_MODE, INPUT_PULLUP);
   pinMode(ESTOP, INPUT_PULLUP);
-  pinMode(LSR1,INPUT_PULLUP);
-  pinMode(LSR2,INPUT_PULLUP);
-  pinMode(LSR3,INPUT_PULLUP);
+  pinMode(LSR1, INPUT_PULLUP);
+  pinMode(LSR2, INPUT_PULLUP);
+  pinMode(LSR3, INPUT_PULLUP);
   pinMode(CS_FWD, INPUT_PULLUP);
   pinMode(CS_RVR, INPUT_PULLUP);
   pinMode(CS_LFT, INPUT_PULLUP);
@@ -87,35 +78,27 @@ void setup(){
   attachInterrupt(digitalPinToInterrupt(LH_ENB), LH_ISRB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(RH_ENA), RH_ISRA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(RH_ENB), RH_ISRB, CHANGE);
-  //attachInterrupt(digitalPinToInterrupt(ESTOP), EMG_STOP, HIGH);
+  attachInterrupt(digitalPinToInterrupt(ESTOP), EMG_STOP, CHANGE); // Activated interrupt
 
   // Micro-ROS Initialization
-  rcl_allocator_t allocator = rcl_get_default_allocator();
-  rclc_support_t support;
+  allocator = rcl_get_default_allocator();
   rclc_support_init(&support, 0, NULL, &allocator);
 
   // Create Node
-  rcl_node_t node;
-  rclc_node_init_default(&node, "arduino_node", "/medibot_namespace", &support);
+  rclc_node_init_default(&node, "arduino_node", "", &support);
 
- // Publishers
-  rcl_publisher_t lwheel_ticks_pub;
-  rcl_publisher_t rwheel_ticks_pub;
+  // Publishers
   rclc_publisher_init_default(&lwheel_ticks_pub, &node, ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int16), "lwheel_ticks");
   rclc_publisher_init_default(&rwheel_ticks_pub, &node, ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int16), "rwheel_ticks");
 
   // Subscriber
-  rcl_subscription_t cmd_vel_sub;
   rclc_subscription_init_default(&cmd_vel_sub, &node, ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist), "cmd_vel");
 
   // Executor
-  rclc_executor_t executor;
   rclc_executor_init(&executor, &support.context, 2, &allocator);
   rclc_executor_add_subscription(&executor, &cmd_vel_sub, &twist_msg, &cmd_vel_callback, ON_NEW_DATA);
-
 }
-
-void loop(){
+void loop() {
   // Execute callbacks for micro-ROS
   rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
 
@@ -161,76 +144,76 @@ void loop(){
     Robot.Move(left_dir * left_pwm, right_dir * right_pwm);
 
     // Publish wheel PWM values
-    rcl_publish(&lwheel_pwm_pub, &lwheel_pwm_msg, NULL);
-    rcl_publish(&rwheel_pwm_pub, &rwheel_pwm_msg, NULL);
+    if (RCL_RET_OK != rcl_publish(&lwheel_pwm_pub, &lwheel_pwm_msg, NULL)) {
+      // Handle error for left wheel PWM publishing
+    }
+    if (RCL_RET_OK != rcl_publish(&rwheel_pwm_pub, &rwheel_pwm_msg, NULL)) {
+      // Handle error for right wheel PWM publishing
+    }
   }
 
-  //RESCUE MODE
-  else if(!digitalRead(SW_MODE) && !digitalRead(ESTOP)){
+  // RESCUE MODE
+  if (!digitalRead(SW_MODE) && !digitalRead(ESTOP)) {
+    // Read sensor states once
+    bool CS_FWD_state = digitalRead(CS_FWD);
+    bool CS_RVR_state = digitalRead(CS_RVR);
+    bool CS_LFT_state = digitalRead(CS_LFT);
+    bool CS_RGT_state = digitalRead(CS_RGT);
+    bool CS_STT_state = digitalRead(CS_STT);
+    bool CS_STP_state = digitalRead(CS_STP);
 
-    if(!digitalRead(CS_FWD) && digitalRead(CS_RVR) && digitalRead(CS_LFT) && digitalRead(CS_RGT) && digitalRead(CS_STT) && digitalRead(CS_STP)){
-      Robot.Move(STRAIGHT_PWM, STRAIGHT_PWM);//forward
+    // Forward
+    if (!CS_FWD_state && CS_RVR_state && CS_LFT_state && CS_RGT_state && CS_STT_state && CS_STP_state) {
+      Robot.Move(STRAIGHT_PWM, STRAIGHT_PWM);
     }
-    else if(digitalRead(CS_FWD) && !digitalRead(CS_RVR) && digitalRead(CS_LFT) && digitalRead(CS_RGT) && digitalRead(CS_STT) && digitalRead(CS_STP)){
-      Robot.Move(-STRAIGHT_PWM, -STRAIGHT_PWM);//reverse
+    // Reverse
+    else if (CS_FWD_state && !CS_RVR_state && CS_LFT_state && CS_RGT_state && CS_STT_state && CS_STP_state) {
+      Robot.Move(-STRAIGHT_PWM, -STRAIGHT_PWM);
     }
-    else if(digitalRead(CS_FWD) && digitalRead(CS_RVR) && !digitalRead(CS_LFT) && digitalRead(CS_RGT) && digitalRead(CS_STT) && digitalRead(CS_STP)){
-      Robot.Move(-TURN_PWM, TURN_PWM);//left
+    // Turn Left
+    else if (CS_FWD_state && CS_RVR_state && !CS_LFT_state && CS_RGT_state && CS_STT_state && CS_STP_state) {
+      Robot.Move(-TURN_PWM, TURN_PWM);
     }
-    else if(digitalRead(CS_FWD) && digitalRead(CS_RVR) && digitalRead(CS_LFT) && !digitalRead(CS_RGT) && digitalRead(CS_STT) && digitalRead(CS_STP)){
-      Robot.Move(TURN_PWM, -TURN_PWM);//right
+    // Turn Right
+    else if (CS_FWD_state && CS_RVR_state && CS_LFT_state && !CS_RGT_state && CS_STT_state && CS_STP_state) {
+      Robot.Move(TURN_PWM, -TURN_PWM);
     }
-    else if(digitalRead(CS_FWD) && digitalRead(CS_RVR) && !digitalRead(CS_LFT) && digitalRead(CS_RGT) && !digitalRead(CS_STT) && digitalRead(CS_STP)){
-      PAN_motor.Rotate(1, PAN_LEFT_LIM, PAN_RIGHT_LIM);//pan left
+    // Pan Left
+    else if (CS_FWD_state && CS_RVR_state && !CS_LFT_state && CS_RGT_state && !CS_STT_state && CS_STP_state) {
+      PAN_motor.Rotate(1, PAN_LEFT_LIM, PAN_RIGHT_LIM);
     }
-    else if(digitalRead(CS_FWD) && digitalRead(CS_RVR) && digitalRead(CS_LFT) && !digitalRead(CS_RGT) && !digitalRead(CS_STT) && digitalRead(CS_STP)){
-      PAN_motor.Rotate(-1, PAN_LEFT_LIM, PAN_RIGHT_LIM);//pan right
+    // Pan Right
+    else if (CS_FWD_state && CS_RVR_state && CS_LFT_state && !CS_RGT_state && !CS_STT_state && CS_STP_state) {
+      PAN_motor.Rotate(-1, PAN_LEFT_LIM, PAN_RIGHT_LIM);
     }
-    else if(!digitalRead(CS_FWD) && digitalRead(CS_RVR) && digitalRead(CS_LFT) && digitalRead(CS_RGT) && digitalRead(CS_STT) && !digitalRead(CS_STP)){
-      TILT_motor.Rotate(1, TILT_UP_LIM, TILT_DOWN_LIM);//tilt up
+    // Tilt Up
+    else if (!CS_FWD_state && CS_RVR_state && CS_LFT_state && CS_RGT_state && CS_STT_state && !CS_STP_state) {
+      TILT_motor.Rotate(1, TILT_UP_LIM, TILT_DOWN_LIM);
     }
-    else if(digitalRead(CS_FWD) && !digitalRead(CS_RVR) && digitalRead(CS_LFT) && digitalRead(CS_RGT) && digitalRead(CS_STT) && !digitalRead(CS_STP)){
-      TILT_motor.Rotate(-1, TILT_UP_LIM, TILT_DOWN_LIM);//tilt down
+    // Tilt Down
+    else if (CS_FWD_state && !CS_RVR_state && CS_LFT_state && CS_RGT_state && CS_STT_state && !CS_STP_state) {
+      TILT_motor.Rotate(-1, TILT_UP_LIM, TILT_DOWN_LIM);
     }
-    else{
-      Robot.Move(MIN_PWM, MIN_PWM);//stop
-      PAN_motor.Rotate(0);//stop pan
-      TILT_motor.Rotate(0);//stop tilt
+    // Default: Stop all motions
+    else {
+      Robot.Move(MIN_PWM, MIN_PWM);
+      PAN_motor.Rotate(0);
+      TILT_motor.Rotate(0);
     }
-
   }
-  //EMERGENCY STOP
-  else{
-    Robot.isRosConnected = -1;
-    Robot.Move(DISABLE_PWM, DISABLE_PWM);//stop motors and disable motor driver
-    PAN_motor.Rotate(0);//stop pan
-    TILT_motor.Rotate(0);//stop tilt
-  }
-
-  // Publishing data to ROS2
-  rcl_ret_t rc;
-
-  rc = rcl_publish(&lwheel_ticks_pub, &lwheel_ticks_msg, NULL);
-  if (rc != RCL_RET_OK) {
-      printf("Failed to publish lwheel_ticks_msg\n");
-  }
-
-  rc = rcl_publish(&rwheel_ticks_pub, &rwheel_ticks_msg, NULL);
-  if (rc != RCL_RET_OK) {
-      printf("Failed to publish rwheel_ticks_msg\n");
-  }
-
-  rc = rcl_publish(&lwheel_pwm_pub, &lwheel_pwm_msg, NULL);
-  if (rc != RCL_RET_OK) {
-      printf("Failed to publish lwheel_pwm_msg\n");
+  // EMERGENCY STOP
+  else {
+    Robot.isRosConnected = -1;  // Indicate disconnected state
+    Robot.Move(DISABLE_PWM, DISABLE_PWM);  // Disable motor driver
+    PAN_motor.Rotate(0);  // Stop pan
+    TILT_motor.Rotate(0);  // Stop tilt
   }
 
-  rc = rcl_publish(&rwheel_pwm_pub, &rwheel_pwm_msg, NULL);
-  if (rc != RCL_RET_OK) {
-      printf("Failed to publish rwheel_pwm_msg\n");
-  }
-
-  // Uncomment and populate these sensor states if required
+  //Publishing data to ROS
+  lwheel_ticks_pub.publish(&lwheel_ticks_msg);
+  rwheel_ticks_pub.publish(&rwheel_ticks_msg);
+  lwheel_pwm_pub.publish(&lwheel_pwm_msg);
+  rwheel_pwm_pub.publish(&rwheel_pwm_msg);
   // sensor_state_msg.ir1 = analogRead(IR1);
   // sensor_state_msg.ir2 = analogRead(IR2);
   // sensor_state_msg.ir3 = analogRead(IR3);
@@ -247,46 +230,52 @@ void loop(){
   // sensor_state_msg.cs_rvr = digitalRead(CS_RVR);
   // sensor_state_msg.cs_lft = digitalRead(CS_LFT);
   // sensor_state_msg.cs_rgt = digitalRead(CS_RGT);
-  // rc = rcl_publish(&sensor_state_pub, &sensor_state_msg, NULL);
-  // if (rc != RCL_RET_OK) {
-  //     printf("Failed to publish sensor_state_msg\n");
-  // }
-
-  // Delay for 200ms to maintain a 5Hz publishing rate
-  vTaskDelay(pdMS_TO_TICKS(200)); // FreeRTOS delay function
+  // sensor_state_pub.publish(&sensor_state_msg);
+  delay(200); //5Hz
 }
 
 ////////////FUNCTION DEFINITIONS////////////////
 
-void LH_ISRA(){
+void LH_ISRA() {
+  // Handle encoder interrupt for left wheel
   lwheel_ticks_msg.data = LH_motor.doEncoderA();
 }
 
-void LH_ISRB(){
+void LH_ISRB() {
+  // Handle encoder interrupt for left wheel
   lwheel_ticks_msg.data = LH_motor.doEncoderB();
 }
 
-void RH_ISRA(){
+void RH_ISRA() {
+  // Handle encoder interrupt for right wheel
   rwheel_ticks_msg.data = RH_motor.doEncoderA();
 }
 
-void RH_ISRB(){
+void RH_ISRB() {
+  // Handle encoder interrupt for right wheel
   rwheel_ticks_msg.data = RH_motor.doEncoderB();
 }
 
-void EMG_STOP(){
+void EMG_STOP() {
+  // Emergency stop to halt all actuators
   Robot.isRosConnected = -1;
-  Robot.Move(DISABLE_PWM, DISABLE_PWM); //stop motors and disable motor driver
-  PAN_motor.Rotate(0); //stop pan
-  TILT_motor.Rotate(0); //stop tilt
+  Robot.Move(DISABLE_PWM, DISABLE_PWM); //Stop motors and disable motor driver
+  PAN_motor.Rotate(0); //Stop pan
+  TILT_motor.Rotate(0); //Stop tilt
 }
 
 float mapFloat(float x, float in_min, float in_max, float out_min, float out_max){
+  // Scale and map a float value from one range to another
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-void cmd_vel_callback( const geometry_msgs::Twist& twist){
+void cmd_vel_callback(const geometry_msgs::Twist& twist) {
+  // Update linear and angular velocity from ROS2 Twist message
   linearX_vel = twist.linear.x;
   angularZ_vel = twist.angular.z;
-  lastCmdVelReceived = millis();
+  lastCmdVelReceived = millis(); // Update timestamp for last command received
 }
+
+
+
+
