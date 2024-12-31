@@ -1,0 +1,543 @@
+<sdf version='1.7'>
+  <model name='medibot_medibotv4'>
+    <link name='base_footprint'>
+      <inertial>
+        <pose>0.026864 0.004768 0.46293 0 -0 0</pose>
+        <mass>224.268</mass>
+        <inertia>
+          <ixx>36.5447</ixx>
+          <ixy>-0.0243052</ixy>
+          <ixz>-1.39026</ixz>
+          <iyy>34.6007</iyy>
+          <iyz>-0.818071</iyz>
+          <izz>12.7828</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_footprint_fixed_joint_lump__base_link_collision'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/base_link.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__body_collision_1'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/body.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__base_scan_collision_2'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/lidar.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__top_panel_collision_3'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/top_panel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__realsense_housing_collision_4'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/realsense_housing.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__left_realsense_collision_5'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/left_realsense.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__right_realsense_collision_6'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/right_realsense.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__bottom_panel_collision_7'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/bottom_panel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__stand_collision_8'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/stand.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__pan_servo_collision_9'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/pan_servo.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__pan_tilt_mount_collision_10'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/pan_tilt_mount.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__tilt_servo_collision_11'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/tilt_servo.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__mount_collision_12'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/mount.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__camera_housing_collision_13'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/camera_housing.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__camera_collision_14'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/camera.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__monitor_collision_15'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/monitor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__caster_collision_16'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/caster.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__circuit_panel_collision_17'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/circuit_panel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__circuit_housing_collision_18'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/circuit_housing.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__left_motor_collision_19'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/left_motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_footprint_fixed_joint_lump__right_motor_collision_20'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/right_motor.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_footprint_fixed_joint_lump__base_link_visual'>
+        <pose>0 0 0.01 0.032 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/base_link.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__body_visual_1'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/body.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__base_scan_visual_2'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/lidar.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__top_panel_visual_3'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/top_panel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__realsense_housing_visual_4'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/realsense_housing.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__left_realsense_visual_5'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/left_realsense.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__right_realsense_visual_6'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/right_realsense.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__bottom_panel_visual_7'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/bottom_panel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__stand_visual_8'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/stand.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__pan_servo_visual_9'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/pan_servo.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__pan_tilt_mount_visual_10'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/pan_tilt_mount.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__tilt_servo_visual_11'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/tilt_servo.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__mount_visual_12'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/mount.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__camera_housing_visual_13'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/camera_housing.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__camera_visual_14'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/camera.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__monitor_visual_15'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/monitor.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__caster_visual_16'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/caster.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__circuit_panel_visual_17'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/circuit_panel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__circuit_housing_visual_18'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/circuit_housing.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__left_motor_visual_19'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/left_motor.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_footprint_fixed_joint_lump__right_motor_visual_20'>
+        <pose>0 0 0.01 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/right_motor.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='wheel_left_joint' type='revolute'>
+      <pose relative_to='base_footprint'>-0.0175 0.279 0.17 0 -0 0</pose>
+      <parent>base_footprint</parent>
+      <child>wheel_left_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>1000</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wheel_left_link'>
+      <pose relative_to='wheel_left_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 -0.03 0 0 -0 0</pose>
+        <mass>2.26688</mass>
+        <inertia>
+          <ixx>0.021472</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.041643</iyy>
+          <iyz>0</iyz>
+          <izz>0.021472</izz>
+        </inertia>
+      </inertial>
+      <collision name='wheel_left_link_collision'>
+        <pose>0.0175 -0.279 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/left_wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wheel_left_link_visual'>
+        <pose>0.0175 -0.279 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/left_wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='wheel_right_joint' type='revolute'>
+      <pose relative_to='base_footprint'>-0.0175 -0.279 0.17 0 -0 0</pose>
+      <parent>base_footprint</parent>
+      <child>wheel_right_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>1000</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wheel_right_link'>
+      <pose relative_to='wheel_right_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.03 -0 0 -0 0</pose>
+        <mass>2.26688</mass>
+        <inertia>
+          <ixx>0.021472</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.041643</iyy>
+          <iyz>0</iyz>
+          <izz>0.021472</izz>
+        </inertia>
+      </inertial>
+      <collision name='wheel_right_link_collision'>
+        <pose>0.0175 0.279 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/right_wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wheel_right_link_visual'>
+        <pose>0.0175 0.279 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://medibot_gazebo/models/medibot_common/meshes/right_wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <plugin name="medibot_diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+      <ros>
+        <!-- <namespace>/medibot</namespace> -->
+      </ros>
+
+      <update_rate>30</update_rate>
+
+      <!-- wheels -->
+      <left_joint>wheel_left_joint</left_joint>
+      <right_joint>wheel_right_joint</right_joint>
+
+      <!-- kinematics -->
+      <wheel_separation>0.498</wheel_separation>
+      <wheel_diameter>0.066</wheel_diameter>
+
+      <!-- limits -->
+      <max_wheel_torque>150</max_wheel_torque>
+      <max_wheel_acceleration>5.0</max_wheel_acceleration>
+
+      <command_topic>cmd_vel</command_topic>
+
+      <!-- output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+
+    </plugin>
+    <plugin name="medibot_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+        <!-- <namespace>/tb3</namespace> -->
+        <remapping>~/out:=joint_states</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <joint_name>wheel_left_joint</joint_name>
+      <joint_name>wheel_right_joint</joint_name>
+    </plugin>   
+  </model>
+</sdf>

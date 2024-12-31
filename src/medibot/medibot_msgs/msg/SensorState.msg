@@ -1,0 +1,17 @@
+std_msgs/Header header
+float32 ir1
+float32 ir2
+float32 ir3
+float32 sonar
+float32 csens
+bool laser1
+bool laser2
+bool laser3
+bool switch_mode
+bool estop
+bool cs_stt
+bool cs_stp
+bool cs_fwd
+bool cs_rvr
+bool cs_lft
+bool cs_rgt
