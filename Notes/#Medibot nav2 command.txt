@@ -1,0 +1,63 @@
+-------------------------------------------------------------------------------------------------------------------
+#Medibot nav2 command
+-------------------------------------------------------------------------------------------------------------------
+
+#terminal 1
+
+source ./install/setup.bash 
+
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/fyp_ws/src/medibot/medibot_simulations/medibot_gazebo/models
+
+export MEDIBOT_MODEL=medibotv4  
+
+ros2 launch medibot_sim medibot_world.launch.py  
+
+
+# terminal 2 (nav2 + amcl initial pose) 
+
+source ./install/setup.bash
+ros2 launch medibot_sim nav2.launch.py
+
+#terminal 3 (autonomy behavior)
+
+source ./install/setup.bash
+ros2 launch medibot_autonomy autonomy.launch.py
+
+
+
+ros2 launch nav2_bringup localization_launch.py map:=/home/helium/fyp_ws/src/medibot_sim/maps/map.yaml
+
+-------------------------------------------------------------------------------------------------------------------
+#Medibot nav2 command (without map)
+-------------------------------------------------------------------------------------------------------------------
+
+#terminal 1
+
+source ./install/setup.bash 
+
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/fyp_ws/src/medibot/medibot_simulations/medibot_gazebo/models
+
+export MEDIBOT_MODEL=medibotv4  
+
+ros2 launch medibot_sim medibot_world.launch.py  
+
+
+# terminal 2 (to create map) #SLAM_TOOLBOX
+
+
+source ./install/setup.bash
+ros2 launch slam_toolbox online_async_launch.py
+
+# terminal 3 (open rviz)
+
+source ./install/setup.bash
+rviz2 
+
+#terminal 4 (teleop_keyboard)
+
+source ./install/setup.bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+# To save map 
+
+ros2 run nav2_map_server map_server_cli -f ~/map

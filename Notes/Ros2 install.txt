@@ -1,0 +1,83 @@
+$ sudo apt install software-properties-common
+$ sudo add-apt-repository universe
+$ sudo apt update && sudo apt install curl
+$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+$ sudo apt update
+$ sudo apt upgrade
+$ sudo apt install ros-humble-desktop
+$ sudo apt install ros-humble-ros-base
+$ sudo apt install ros-dev-tools
+
+$ sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-gazebo-ros2-control
+$ sudo apt install ros-humble-gazebo-ros-pkgs
+$ sudo apt install ros-humble-ros-core ros-humble-geometry2
+$ sudo pip3 install setuptools
+$ sudo apt-get install ros-humble-joint-state-publisher-gui ros-humble-xacro
+
+$ sudo apt install ros-humble-navigation2
+$ sudo apt install ros-humble-nav2-bringup
+$ sudo apt install ros-humble-slam-toolbox
+
+$ sudo apt install ros-humble-robot-localization
+$ sudo apt install ros-humble-robot-state-publisher
+$ sudo apt install ros-humble-rviz2
+
+# sudo apt install ros-humble-teleop-twist-keyboard
+
+$ sudo rosdep init
+$ rosdep update
+# src like ~/SnowCron/ros_projects/harsh 
+# (go into the workspace/create src in workspace before run next line)
+$ rosdep install --from-paths src --ignore-src --rosdistro humble -y
+
+$ sudo apt install python3-colcon-common-extensions
+
+# Note: changed API after this version
+$ pip install opencv-contrib-python==4.6.0.66 
+$ sudo apt install ros-humble-aruco
+
+# Robotic arm
+$ sudo apt install python3-vcstool
+$ sudo apt install ros-humble-test-msgs
+$ sudo apt install ros-humble-control-toolbox
+$ sudo apt install ros-humble-gazebo-ros-pkgs
+$ sudo apt install ros-humble-xacro
+$ sudo apt install ros-humble-joint-state-publisher-gui
+
+$ pip install tinyik
+
+$ pip install pyproj
+$ pip install geopy
+
+# With the visualization feature:
+$ pip install tinyik[viz]
+
+# Transformations tree tool
+$ sudo apt-get install -y ros-humble-rqt-tf-tree
+
+rosdep install --from-paths ./ -i -y --rosdistro humble --ignore-src
+sudo apt-get install ros-humble-ros2-control ros-humble-ros2-controllers
+
+sudo apt update && sudo apt install blender
+
+sudo apt install ros-humble-gazebo-ros-pkgs
+
+source /opt/ros/humble/setup.bash
+
+#pip install trimesh
+#pip install pymesh
+#pip install pydae
+#pip install pymeshfix
+pip install open3d
+#pip install vtk
+
+python3 -m pip install scipy
+or
+sudo apt-get install python3-scipy
+
+pip3 install filterpy
+
+#pip3 install tensorflow
+
+pip install transform3d

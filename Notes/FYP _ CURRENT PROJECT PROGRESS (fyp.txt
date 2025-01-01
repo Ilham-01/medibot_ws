@@ -1,0 +1,194 @@
+FYP _ CURRENT PROJECT PROGRESS (fyp_ws)
+
+
+
+
+
+ <maintainer email="ilhamnuramir@gmail.com">Ilham</maintainer>
+
+
+
+
+
+
+
+
+"things that needs to be updated "
+
+src
+├── fyp_sim
+│   ├── fyp_sim
+│   │   └── __init__.py
+│   ├── launch
+│   │   └── medibot_world.launch.py
+│   ├── package.xml
+│   ├── resource
+│   │   └── fyp_sim
+│   ├── setup.cfg
+│   ├── setup.py
+│   └── test
+│       ├── test_copyright.py
+│       ├── test_flake8.py
+│       └── test_pep257.py
+├── medibot
+│   ├── medibot
+│   │   ├── medibot						( X )
+│   │   ├── medibot_description			( X )	
+│   │   └── medibot_bringup      
+│   │       ├── CMakeLists.txt 			( / )
+│   │       ├── package.xml 				( / )
+│   │       ├── launch
+│   │       │   ├── medibot_state_publisher.launch.py  ( / )
+│   │       │   ├── robot.launch.py			( / )
+│   │       │   └── rviz2.launch.py			( / )
+│   │       ├── param
+│   │       │   └── medibot.yaml 				( X ) 
+│   │       └── script 						
+│   │           ├── 99-medibot-cdc.rules		( X )
+│   │           └── create_udev_rules			( / )
+│   │   └── medibot_cartographer						
+│   │   │   ├── CMakeLists.txt							( / )
+│   │   │   ├── package.xml							( / )
+│   │   │   ├── config									( / )
+│   │   │   ├── launch									( / )
+│   │   │   └── rviz
+│   │   │       └── medibot_cartographer.rviz			( X )
+│   │   │   
+│   │   ├── medibot_example
+│   │   │   ├── medibot_example
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── medibot_obstacle_detection
+│   │   │   │   ├── medibot_patrol_client
+│   │   │   │   ├── medibot_patrol_server
+│   │   │   │   └── medibot_position_control
+│   │   │   ├── package.xml
+│   │   │   ├── resource
+│   │   │   │   └── medibot_example
+│   │   │   ├── setup.cfg
+│   │   │   └── setup.py
+│   │   │   
+│   │   └── medibot_navigation2
+│   │   │   ├── CMakeLists.txt							( / )
+│   │   │   ├── package.xml							( / )	
+│   │   │   ├── launch									( / )
+│   │   │   ├── map									( / )
+│   │   │   ├── param
+│   │   │   │   └── medibot.yaml						( X )
+│   │   │   └── rviz
+│   │   │         └── medibot_navigation2.rviz			( X )
+│   │   │   
+│   │   └── medibot_node
+│   │       ├── CMakeLists.txt							( / )
+│   │       ├── package.xml							( / )
+│   │       ├── include
+│   │       │   └── medibot_node
+│   │       │       ├── control_table.hpp				( / )
+│   │       │       ├── diff_drive_controller.hpp		( / )
+│   │       │       ├── dynamixel_sdk_wrapper.hpp		( / )
+│   │       │       ├── odometry.hpp					( / )
+│   │       │       ├── devices						( / )
+│   │       │       │   ├── devices.hpp				
+│   │       │       │   ├── motor_power.hpp			
+│   │       │       │   ├── reset.hpp					
+│   │       │       │   └── sound.hpp					
+│   │       │       ├── sensors						( / )
+│   │       │       │   ├── battery_state.hpp
+│   │       │       │   ├── imu.hpp
+│   │       │       │   ├── joint_state.hpp
+│   │       │       │   ├── sensor_state.hpp
+│   │       │       │   └── sensors.hpp
+│   │       │       └── medibot.hpp					( / )
+│   │       ├── param
+│   │       │   ├── medibot.yaml						( X )
+│   │       └── src
+│   │           ├── devices							( / )
+│   │           │   ├── motor_power.cpp
+│   │           │   ├── reset.cpp
+│   │           │   └── sound.cpp
+│   │           ├── diff_drive_controller.cpp			( / )
+│   │           ├── dynamixel_sdk_wrapper.cpp			( / )
+│   │           ├── node_main.cpp						( / )
+│   │           ├── odometry.cpp						( / )
+│   │           ├── sensors
+│   │           │   ├── battery_state.cpp				( / )
+│   │           │   ├── imu.cpp						( / )	
+│   │           │   ├── joint_state.cpp				( / )
+│   │           │   └── sensor_state.cpp				( / )
+│   │           └── turtlebot3.cpp						( / )
+│   │   └── medibot_teleop
+│   │       ├── medibot_teleop							( / )
+│   │       │   ├── __init__.py						( / )
+│   │       │   └── script							( / )
+│   │       │       ├── __init__.py					( / )
+│   │       │       └── teleop_keyboard.py			( / )
+│   │       ├── package.xml							( / )
+│   │       ├── resource								( / )
+│   │       │   └── medibot_teleop					( / )
+│   │       ├── setup.cfg
+│   │       └── setup.py								( / )
+
+│   ├── medibot_msgs
+│   │   ├── CMakeLists.txt								( / )
+│   │   ├── package.xml								( / )
+│   │   ├── action										( / )
+│   │   │   └── Patrol.action
+│   │   ├── msg										( X )
+│   │   │   ├── SensorState.msg
+│   │   │   ├── Sound.msg
+│   │   │   └── VersionInfo.msg						( / )
+│   │   └── srv
+│   │       ├── Dqn.srv								( / )
+│   │       └── Sound.srv								( X )
+
+
+│   └── medibot_simulations
+│       ├── medibot_fake_node
+│       │   ├── CMakeLists.txt							( / )
+│       │   ├── package.xml							( / )
+│       │   ├── include								( / )
+│       │   ├── launch									( / )
+│       │   ├── param
+│       │   │   └── medibot.yaml						( X )
+│       │   └── src
+│       │       └── turtlebot3_fake_node.cpp			( / )
+│       ├── medibot_gazebo
+│       │   ├── CHANGELOG.rst							( / )
+│       │   ├── CMakeLists.txt							( / )
+│       │   ├── include
+│       │   │   └── medibot_gazebo
+│       │   ├── launch									( / )
+│       │   │   ├── empty_world.launch.py
+│       │   │   ├── medibot_dqn_stage1.launch.py
+│       │   │   ├── medibot_dqn_stage2.launch.py
+│       │   │   ├── medibot_dqn_stage3.launch.py
+│       │   │   ├── medibot_dqn_stage4.launch.py
+│       │   │   ├── medibot_house.launch.py
+│       │   │   ├── robot_state_publisher.launch.py
+│       │   │   ├── spawn_turtlebot3.launch.py
+│       │   │   └── turtlebot3_world.launch.py
+│       │   ├── models									( / )
+│       │   │   ├── medibot_burger
+│       │   │   ├── medibot_common
+│       │   │   ├── medibot_dqn_world
+│       │   │   ├── medibot_house
+│       │   │   ├── medibot_waffle
+│       │   │   ├── medibot_world
+│       │   │   └── turtlebot3_waffle_pi
+│       │   ├── package.xml
+│       │   ├── rviz									( / )
+│       │   │   └── medibot_gazebo.rviz
+│       │   ├── src									( / )
+│       │   │   └── medibot_drive.cpp
+│       │   ├── urdf									( / )
+│       │   │   ├── common_properties.urdf
+│       │   │   ├── medibot_burger.urdf
+│       │   │   ├── medibot_waffle.urdf
+│       │   │   └── medibot_waffle_pi.urdf
+│       │   └── worlds									( / )
+
+│       └── medibot_simulations
+│           ├── CMakeLists.txt
+│           └── package.xml
+
+
+└── utils												( / )

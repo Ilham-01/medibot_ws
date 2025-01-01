@@ -1,0 +1,116 @@
+# DOCKER setup 
+------------------------------------------------------------------------------------------------------------------
+#1 install (need to install curl)
+-------------------------------------------------------------------------------------------------------------------
+
+from :  docs.docker.com/engine/install/ubuntu
+
+* install using convenience script 
+
+- follow the code .
+-----------------------------------------------------------------------------------------------------------------
+# 2 post install step 
+-------------------------------------------------------------------------------------------------------------------
+
+sudo groupadd docker 
+
+sudo usermod -aG docker $USER 
+
+#  check if docker enabled 
+
+systemctl is-enabled docker 
+
+# reboot 
+-------------------------------------------------------------------------------------------------------------------
+
+# DOCKER COMMON COMMAND 
+
+-------------------------------------------------------------------------------------------------------------------
+
+# images list  
+
+docker image ls 
+docker images
+
+# pull images
+
+docker image pull <name>:<tag> 
+docker image pull ros:humble
+docker pull
+
+# delete image
+
+docker image rm 
+docker image rm -f (to force)
+docker rmi
+
+# to run container (run image as container)
+
+docker container run
+docker run <image>
+docker run ros:humble
+
+# to run with terminal 
+
+docker run -it <image>
+docker run -it ros:humble
+
+# tell if containers running (+ show autoname of container) 
+
+docker container ls
+docker ps
+
+# to stop container
+
+{ctrl + D}
+docker container stop <autoname>
+docker stop 
+
+# to start back the container 
+
+docker container start -i <autoname>
+docker start
+
+# To remove a container 
+
+docker container rm <autoname>
+docker container prune     #(to remove all container)
+
+#to check the docker space 
+
+docker system df
+
+-------------------------------------------------------------------------------------------------------------------
+
+# Tips 
+
+# to set a name instead of autoname
+
+docker run -it --name <image> 
+
+# to run a new terminal for the same container
+
+docker exec -it <name/autoname> /bin/bash
+
+
+
+# directory to workspace in nvidia
+
+/home/mic-710aix/fyp_ws
+
+-------------------------------------------------------------------------------------------------------------------
+
+# ROS2 docker run command
+
+docker run -it --rm \
+    --name ros2_container \
+    -v /home/mic-710aix/fyp_ws:/fyp_ws \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    ros:humble
+
+# vs code docker run command 
+docker run -it -p 8080:8080 \
+-v /home/mic-710aix/fyp_ws:/home/Helium/fyp_ws \
+codercom/code-server:latest \
+--auth none

@@ -1,0 +1,8 @@
+# request
+string action
+string label
+string ns
+---
+#response
+bool success
+string message
